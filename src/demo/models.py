@@ -68,6 +68,9 @@ class Actor(Base):
     first_name = Column(Unicode(45), nullable=False)
     last_name = Column(Unicode(45), nullable=False)
     last_update = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+    
+    def full_name(self):
+        return "{0} {1}".format(self.first_name, self.last_name)  
 
 
 class ActorMgr(object):

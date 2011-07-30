@@ -62,6 +62,12 @@ Now that the new actor 'Rick' is added, remove him and verify that you get back
 200 actors in the database
 """
 
+session.delete(rick)
+ct = Actor.query.count()
+plog("Actor Count via .count(): {0} ".format(ct))
+
+assert(ct == 200)
+
 
 """
 Homework:
@@ -72,6 +78,11 @@ a. Display the actors full name via a single method
 
 """
 
+first_actor = Actor.query.first()
+full_name = first_actor.full_name()  
+plog("Actor's full name is {0}".format(full_name))
+
+assert(full_name == 'PENELOPE GUINESS')
 
 """
 Homework:
