@@ -5,6 +5,7 @@ We'll start you off with some imports and samples
 
 """
 from models import Actor
+from models import ActorMgr
 from models import Language
 from models import session
 
@@ -92,6 +93,19 @@ name, or a partial character search (e.g. actors with 'rod' anywhere in the
 first or last name)
 """
 
+graces = ActorMgr.by_partial_name('GRACE')
+plog("Found {0} persons with first name of Grace".format(graces.count()))
+
+assert(graces.count() == 1)
+
+chases = ActorMgr.by_partial_name('CHASE')
+plog("Found {0} persons with last name of Chase".format(chases.count()))
+assert(chases.count() == 2)
+
+ora = ActorMgr.by_partial_name('ORA')
+full_name = ora.first().full_name()
+plog("First person with 'thon' in their name is {0}".format(full_name))
+assert(full_name == "THORA TEMPLE")
 
 """
 Homework:

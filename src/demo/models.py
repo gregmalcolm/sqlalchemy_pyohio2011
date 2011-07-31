@@ -7,6 +7,7 @@ sqlite as best as I cared to port it.
 """
 from datetime import datetime
 from sqlalchemy import create_engine
+from sqlalchemy import or_
 
 from sqlalchemy import Column
 from sqlalchemy import DateTime
@@ -93,6 +94,11 @@ class ActorMgr(object):
                      order_by(Actor.last_name).\
                      all()
 
+    @staticmethod
+    def by_partial_name(match):
+       return Actor.query. \
+                    filter(or_(Actor.first_name.contains(match.upper()),
+                    Actor.last_name.contains(match.upper())))
 
 """
 Language
